@@ -1,0 +1,106 @@
+---
+title: "Acne Analysis"
+author: "Ethan Heinzen"
+date: "05/08/2017"
+output:
+  pdf_document:
+    toc: true
+classoption: landscape
+---
+
+\newpage
+
+```{r echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.height = 6, fig.width = 8, fig.align = 'center', message = FALSE, warning = FALSE, comment = "")
+
+```
+
+```{r message = FALSE}
+source("Acne_analysis_functions.R")
+```
+
+# Acne_p
+
+## EIC
+
+```{r}
+set.seed(88)
+s <- sim("acne_p", nsim = 50, npersim = 1000, which = "EIC")
+plot(s)
+```
+
+```{r}
+summary(s)
+p <- predict(s, newdata = DAT$testing[-(1:(1+maxlag())), ], conf.int = FALSE)
+summary(p)
+plot(p)
+```
+
+\newpage
+
+## BIC
+
+```{r eval = FALSE}
+set.seed(88)
+s <- sim("acne_p", nsim = 50, npersim = 1000, which = "BIC")
+plot(s)
+```
+
+```{r eval = FALSE}
+summary(s)
+p <- predict(s, newdata = DAT$testing[-(1:(1+maxlag())), ], conf.int = FALSE)
+summary(p)
+plot(p)
+```
+
+\newpage
+
+## Tree
+
+```{r}
+plot(at <- tree())
+```
+
+\newpage
+
+# Bacne_p
+
+## EIC
+
+```{r}
+set.seed(88)
+s <- sim("bacne_p", nsim = 50, npersim = 1000, which = "EIC")
+plot(s)
+```
+
+```{r}
+summary(s)
+p <- predict(s, newdata = DAT$testing[-(1:(1+maxlag())), ], conf.int = FALSE, n = 100L)
+summary(p)
+plot(p)
+```
+
+\newpage
+
+## BIC
+
+```{r eval = FALSE}
+set.seed(88)
+s <- sim("bacne_p", nsim = 50, npersim = 1000, which = "BIC")
+plot(s)
+```
+
+```{r eval = FALSE}
+summary(s)
+p <- predict(s, newdata = DAT$testing[-(1:(1+maxlag())), ], conf.int = FALSE, n = 100L)
+summary(p)
+plot(p)
+```
+
+\newpage
+
+## Tree
+
+```{r}
+plot(at <- tree())
+```
